@@ -1,0 +1,6 @@
+fastapi[all] == 0.77.1
+elasticsearch == 7.17.3
+elasticsearch-dsl==7.4.0
+flake8 == 4.0.1
+black == 22.3.0
+pytest == 7.1.2 

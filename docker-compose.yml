@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+
+  backend:
+    build:
+      context: ./backend
+    image: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - model-index
+    volumes:
+      - ./backend/:/backend
+
+
+  model-index:
+    image: "elasticsearch:7.4.0"
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - node.name=elasticsearch
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - 9200:9200
+    volumes:
+      - ./es-data:/usr/share/elasticsearch/data
