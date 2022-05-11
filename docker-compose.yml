@@ -1,6 +1,14 @@
 version: '3.7'
 services:
 
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "7860:7860"
+    depends_on:
+      - backend
+
   backend:
     build:
       context: ./backend
@@ -14,7 +22,7 @@ services:
 
 
   model-index:
-    image: "elasticsearch:7.4.0"
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -28,5 +36,6 @@ services:
         hard: 65536
     ports:
       - 9200:9200
+      - 9300:9300
     volumes:
       - ./es-data:/usr/share/elasticsearch/data

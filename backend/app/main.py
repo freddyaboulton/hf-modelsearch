@@ -1,13 +1,13 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from app.model_index import ElasticSearchModelIndex, Model
 from app.pydantic_models import ModelBody
-from typing import Dict, Union
+from typing import Dict
 
 
 app = FastAPI()
 
 def get_index() -> ElasticSearchModelIndex:
-    index = ElasticSearchModelIndex("172.18.0.2", "9200")
+    index = ElasticSearchModelIndex("host.docker.internal:9200")
     try:
         yield index
     finally:
@@ -48,9 +48,3 @@ def add_model_to_index(model: ModelBody, index: ElasticSearchModelIndex = Depend
         return {"message": f"Not adding model {model.id} to index since contents match what's currently in the index"}
     else:
         return add_to_index(model, index)
-    
-
-
-    
-
-

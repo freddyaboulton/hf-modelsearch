@@ -21,8 +21,8 @@ class ModelIndex(abc.ABC):
 
 class ElasticSearchModelIndex(ModelIndex):
 
-    def __init__(self, host: str, port: str) -> None:
-        self.client = Elasticsearch([{'host': host, 'port': port}])
+    def __init__(self, host: str) -> None:
+        self.client = Elasticsearch([host])
 
     def add_to_index(self, id: str, readme_text: str) -> None:
         model = Model(meta={'id': id}, readme=readme_text)
