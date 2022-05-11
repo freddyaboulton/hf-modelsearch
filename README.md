@@ -58,7 +58,9 @@ I think my choice of using elasticsearch would be able to handle 100,000 models.
 
 # Immediate Next steps
 1. Unit testing.
-2. Specifying different service urls via environment variables.
+2. Linting.
+3. Specifying different service urls via environment variables.
+4. Continuous integration.
 
 # Things to look into
 1. Async elasticnet client
