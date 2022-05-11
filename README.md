@@ -12,10 +12,16 @@ REST API + gradio frontend for searching models in Huggingface model hub based o
 6. You can also visit the gradio front-end at `http://localhost:7000`
 7. View the documentation at `http://localhost:8000/docs/`. Note that you can `POST` to `/model/` endpoint to manually add data to the index as well.
 
-# Snapshots
+# Screenshots
+
+### Gradio
 ![Gradio Frontend](./assets/gradio_frontend.png)
+
+### REST API
 ![REST API](./assets/rest_api.png)
 
+### Synchronize script
+![Adding to the index](./assets/adding_to_index.png)
 
 # Design
 
@@ -43,7 +49,13 @@ Depending on what the requirements are on data consistency I think we could do t
 
 Another downside of my design is that updating the index will go through the server, which may increase the latency of read requests during that time. This could be fixed by having separate read and write elasticsearch clients. Since this application will be read-heavy, we can have many more read clients that write clients. 
 
+## How would my design change if the number of repositories increased to +100,000?
+
+I think my choice of using elasticsearch would be able to handle 100,000 models. I think the data synchronization is what would have to be reworked in order to not increase the latency of search requests as more post requests are sent. As I mentioned above, I think having separate read and write clients would help. 
 
 # Immediate Next steps
 1. Unit testing.
 2. Specifying different service urls via environment variables.
+
+# Things to look into
+1. Async elasticnet client
