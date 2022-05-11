@@ -6,8 +6,11 @@ REST API + gradio frontend for searching models in Huggingface model hub based o
 
 1. Make sure you have docker installed
 2. Make the directory to store the readmes: `mkdir es-data` followed by `chmod 777 es-data`
-3. Run: `docker-compose up`
-4. Run the synchronization script to populate the index with READMEs. `python backend/app/synchronize_index.py --number k`. `k` can be from `1` to `40,000`. I tried with `5,000`. This script should be able to run in any python 3.7+ environment since it doesn't have any external dependencies.
+3. Run `docker-compose up`
+4. Run the synchronization script to populate the index with READMEs.
+    * `python backend/app/synchronize_index.py --number k`.
+    * `k` can be from `1` to `40,000`. I tried with `5,000`.
+    *  This script should be able to run in any `python>=3.7` environment since it doesn't have any external dependencies.
 5. Search for models whose README contain `bert`, `curl -X 'GET' 'http://localhost:8000/search/?query=bert' -H 'accept: application/json'`
 6. You can also visit the gradio front-end at `http://localhost:7000`
 7. View the documentation at `http://localhost:8000/docs/`. Note that you can `POST` to `/model/` endpoint to manually add data to the index as well.
